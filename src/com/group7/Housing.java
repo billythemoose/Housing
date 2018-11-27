@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Housing {
 
     private static int UserID;
+    private static BufferedReader Buff;
 
     public static void main(String[] args) {
         runProgram();
@@ -15,14 +16,14 @@ public class Housing {
 
     public static void runProgram() {
         System.out.println("****************************************************************************************");
-        System.out.println("                              Welcome to the Housing System");
-        System.out.println("                                         ************");
+        System.out.println("                        Welcome to the Housing System");
         System.out.println("****************************************************************************************");
 
-        BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
+        Buff = new BufferedReader(new InputStreamReader(System.in));
         Boolean go = true;
         while (go) {
             UserID = -1;
+            System.out.println("                                Main Menu");
             System.out.println("                                    1. Resident Login");
             System.out.println("                                    2. Applicant Login");
             System.out.println("                                    3. Administrator Login");
@@ -35,7 +36,8 @@ public class Housing {
 
 
             try {
-                int input = Integer.parseInt(buff.readLine());
+                int input = Integer.parseInt(Buff.readLine());
+                System.out.println();
                 switch(input) {
                     case 1: input = 1;
                         go = residentLogin();
@@ -67,6 +69,13 @@ public class Housing {
             catch (IOException e) {
             }
         }
+
+        if (Buff != null) {
+            try {
+                Buff.close();
+            }
+            catch (Exception e) {}
+        }
     }
 
 
@@ -74,8 +83,7 @@ public class Housing {
     public static Boolean residentLogin() {
         try {
             System.out.print("Student ID: ");
-            BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
-            int input = Integer.parseInt(buff.readLine());
+            int input = Integer.parseInt(Buff.readLine());
             String query = "SELECT student_id FROM housing.resident WHERE student_id = " + input;
             executeLoginQuery(query, false);
         }
@@ -88,13 +96,12 @@ public class Housing {
     public static Boolean applicantLogin() {
         try {
             System.out.print("Student ID: ");
-            BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
-            int input = Integer.parseInt(buff.readLine());
+            int input = Integer.parseInt(Buff.readLine());
             String query = "SELECT student_id FROM housing.applicant WHERE student_id = " + input;
             Boolean result = executeLoginQuery(query, false);
             if (!result) {
                 System.out.print("Would you like to start a new application? (Y/N)");
-                String startNew = buff.readLine();
+                String startNew = Buff.readLine();
                 if (startNew == "Y" || startNew == "y") {
 
                 }
@@ -112,8 +119,7 @@ public class Housing {
     public static Boolean adminLogin() {
         try {
             System.out.print("Admin ID: ");
-            BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
-            int input = Integer.parseInt(buff.readLine());
+            int input = Integer.parseInt(Buff.readLine());
             String query = "SELECT admin_id FROM housing.admin WHERE admin_id = " + input;
             executeLoginQuery(query, true);
         }
@@ -125,20 +131,54 @@ public class Housing {
 
     //</editor-fold>
 
+
+
     //<editor-fold desc="Demographic Information">
     public static Boolean demographicStudies() {
+        Boolean go = true;
+        while (go) {
+            System.out.println("Demographic Information Selection:");
+            try {
+                System.out.println("    1. Female Student Resident History");
+                System.out.println("    2. Married Resident Major Information");
+                System.out.println("    3. Back");
+                System.out.print("Type in your option: ");
+                int input = Integer.parseInt(Buff.readLine());
+                switch(input) {
+                    case 1: input = 1;
+                        females();
+                        break;
+                    case 2: input = 2;
+                        married();
+                        break;
+                    case 3: input = 3;
+                        go = false;
+                        break;
+                    default:
+                        System.out.println(String.format("Input %d is not a valid option", input));
+                        break;
+                }
+            }
+            catch (Exception e) {
+                System.out.println(e.toString());
+            }
+
+            System.out.println();
+        }
+
         return true;
     }
 
-    public static Boolean females() {
-        return true;
+    public static void females() {
+        queries(4);
     }
 
-    public static Boolean married() {
-        return true;
+    public static void married() {
+        queries(5);
     }
 
     //</editor-fold>
+
 
 
     //<editor-fold desc="Database Execution">
