@@ -4,6 +4,7 @@ import com.mysql.cj.jdbc.Driver;
 import java.sql.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.math.BigInteger;
 
 public class Housing {
 
@@ -100,10 +101,10 @@ public class Housing {
             String query = "SELECT student_id FROM housing.applicant WHERE student_id = " + input;
             Boolean result = executeLoginQuery(query, false);
             if (!result) {
-                System.out.print("Would you like to start a new application? (Y/N)");
+                System.out.print("Would you like to start a new application? (Y/N): ");
                 String startNew = Buff.readLine();
-                if (startNew == "Y" || startNew == "y") {
-
+                if (startNew.equals("Y") || startNew.equals("y")) {
+                    applicantCreateNew();
                 }
             }
             else {
@@ -327,6 +328,34 @@ public class Housing {
 
     //</editor-fold>
 
+    //<editor-fold desc="Applicant Actions>
+    public static void applicantCreateNew() {
+        BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
+        BigInteger sID, fee;
+        String appDate;
+        String query = "INSERT INTO housing.applicant (student_id,application_status,submission_date,fee,married) VALUES (";
+        boolean married;
+        try {
+            System.out.print("Student ID: ");
+            sID = new BigInteger(buff.readLine());
+            System.out.print("Fee: ");
+            fee = new BigInteger(buff.readLine());
+            System.out.print("Enter Date (YYYY-MM-DD): ");
+            appDate = buff.readLine();
+            System.out.print("Married (TRUE or FALSE): ");
+            married = Boolean.valueOf(buff.readLine());
+            query = query + sID + "," + "'In Progress'" + ", '" + appDate + "'," + fee + "," + married + ");" ;
+            String validate = "SELECT * FROM housing.applicant WHERE student_id = " + sID;
+            testDBUpdate(query, validate);
+            createRoomPref(sID);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (Exception e) {
+
+        }
+    }
+    //</editor-fold>
     //</editor-fold>
 
 
@@ -448,6 +477,66 @@ public class Housing {
         }
     }
 
+    public static void createRoomPref(BigInteger sid) throws SQLException {
+        String desRoom;
+        System.out.println();
+        System.out.println("Available Room Types:");
+        testDB("SELECT DISTINCT room_type FROM room;");
+        BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Select Desired Room Type: ");
+        try {
+            desRoom = buff.readLine();
+
+            String lonngq = "SELECT application_id FROM housing.applicant WHERE student_id = " + sid;
+            String applicationString = testDBString(lonngq, "application_id");
+            int applicationID = Integer.parseInt(applicationString);
+            if (applicationID > -1) {
+                String queryRoom = "INSERT INTO preferred_room (application_id, room_type_1) VALUES (" + applicationID + ", \"" + desRoom + "\")";
+                String validationQuery = "SELECT * FROM preferred_room WHERE application_id = " + applicationID;
+                testDBUpdate(queryRoom, validationQuery);
+            }
+            // ResultSet set = testDBString("SELECT application_id FROM applicant WHERE applicant.student_id = '" + sid + "'");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public static void testDBUpdate(String query){
+        try {
+            DriverManager.registerDriver(new Driver());
+            String url = "jdbc:mysql://localhost:3306/housing?autoReconnect=true&useSSL=false";
+            Connection con = DriverManager.getConnection(url, "student", "password");
+            Statement st = con.createStatement();
+            st.executeUpdate(query);
+            con.close();
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public static String testDBString(String query, String resultColumnName) {
+        String resultString = "-1";
+        try {
+            DriverManager.registerDriver(new Driver());
+            String url = "jdbc:mysql://localhost:3306/housing?autoReconnect=true&useSSL=false";
+            Connection con = DriverManager.getConnection(url, "student", "password");
+            Statement st = con.createStatement();
+            ResultSet result = st.executeQuery(query);
+            result.next();
+            resultString = result.getString(resultColumnName);
+            con.close();
+            return resultString;
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return resultString;
+    }
+
 
     public static Boolean queries(int option) {
         String query = "";
@@ -469,8 +558,33 @@ public class Housing {
                 result = true;
                 break;
             case 3: option = 3;
-                query = "";
+            /*
+                testDB("SELECT DISTINCT room_type FROM room;");
+                BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
+                BigInteger sID, fee;
+                String appDate;
+                query = "INSERT INTO housing.applicant (student_id,application_status,submission_date,fee,married) VALUES (";
+                boolean married;
+                try {
+                    System.out.print("Student ID: ");
+                    sID = new BigInteger(buff.readLine());
+                    System.out.print("Fee: ");
+                    fee = new BigInteger(buff.readLine());
+                    System.out.print("Enter Date (YYYY-MM-DD): ");
+                    appDate = buff.readLine();
+                    System.out.print("Married (True or False): ");
+                    married = Boolean.valueOf(buff.readLine());
+                    query = query + sID + "," + "'In Progress'" + ", '" + appDate + "'," + fee + "," + married + ");" ;
+                    testDBUpdate(query);
+                    createRoomPref(sID);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                catch (Exception e) {
+
+                }
                 testDB(query);
+                */
                 result = true;
                 break;
             case 4: option = 4;
