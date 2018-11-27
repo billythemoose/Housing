@@ -189,100 +189,132 @@ public class Housing {
         try {
             System.out.println("Resident Student ID: ");
             int input = Integer.parseInt(Buff.readLine());
-            if (validateResident(input)) {
-                try {
-                    System.out.println("    1. Change Location");
-                    System.out.println("    2. Adjust Rent");
-                    System.out.println("    3. Back");
-                    System.out.print("Type in your option: ");
-                    int updateInput = Integer.parseInt(Buff.readLine());
-                    switch(updateInput) {
-                        case 1: updateInput = 1;
-                            System.out.print("New Building ID: ");
-                            int newBuilding = Integer.parseInt(Buff.readLine());
-                            System.out.print("New Room Number: ");
-                            int newRoom = Integer.parseInt(Buff.readLine());
-                            String query = "UPDATE housing.resident SET building_id = " + newBuilding
-                                    + ", room_number= " + newRoom + " WHERE student_id = "  + input;
-                            String validate = "SELECT * FROM housing.resident WHERE student_id = " + input;
-                            testDBUpdate(query, validate);
-                            break;
-                        case 2: updateInput = 2;
-                            adminManageApplicants();
-                            break;
-                        case 3: updateInput = 3;
-                            break;
-                        default:
-                            System.out.println(String.format("Input %d is not a valid option", updateInput));
-                            break;
+            if (validateResident(input, "housing.resident")) {
+                Boolean go = true;
+                while(go) {
+                    try {
+                        System.out.println("    1. Change Location");
+                        System.out.println("    2. Adjust Rent");
+                        System.out.println("    3. Back");
+                        System.out.print("Type in your option: ");
+                        int updateInput = Integer.parseInt(Buff.readLine());
+                        switch (updateInput) {
+                            case 1:
+                                updateInput = 1;
+                                System.out.print("New Building ID: ");
+                                int newBuilding = Integer.parseInt(Buff.readLine());
+                                System.out.print("New Room Number: ");
+                                int newRoom = Integer.parseInt(Buff.readLine());
+                                String queryLocation = "UPDATE housing.resident SET building_id = " + newBuilding
+                                        + ", room_number= " + newRoom + " WHERE student_id = " + input;
+                                String validateLocation = "SELECT * FROM housing.resident WHERE student_id = " + input;
+                                testDBUpdate(queryLocation, validateLocation);
+                                break;
+                            case 2:
+                                updateInput = 2;
+                                System.out.print("New Outstanding Rent Amount: ");
+                                int newRent = Integer.parseInt(Buff.readLine());
+                                String queryRent = "UPDATE housing.resident SET outstanding_rent = " + newRent
+                                        + " WHERE student_id = " + input;
+                                String validateRent = "SELECT * FROM housing.resident WHERE student_id = " + input;
+                                testDBUpdate(queryRent, validateRent);
+                                break;
+                            case 3:
+                                updateInput = 3;
+                                go = false;
+                                break;
+                            default:
+                                System.out.println(String.format("Input %d is not a valid option", updateInput));
+                                break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.toString());
                     }
                 }
-                catch (Exception e) {
-                    System.out.println(e.toString());
-                }
-            }
-            else {
+            } else {
                 System.out.println("Could not find Resident with ID " + input);
             }
-            // try and find the student id
-            // if found, print out the information
-            // print out the potential options
-                // change building ID and room number
-                // change outstanding rent
-            // take option
-            // ask for new inputs
-            // attempt update of inputs
-                // room update
-                    // update
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
-
         System.out.println();
     }
 
-    public static boolean validateResident(int studentID) {
-        ResultSet result = null;
-        try {
-            DriverManager.registerDriver(new Driver());
-            String url = "jdbc:mysql://localhost:3306/housing?useSSL=false";
-            Connection con = DriverManager.getConnection(url, "student", "password");
-            Statement st = con.createStatement();
-            result = st.executeQuery("SELECT * FROM housing.resident WHERE student_id = " + studentID);
-            //
-            // result.next();
-            // String id = result.getString("student_id");
-            // int sid = Integer.parseInt(id);
-
-            ResultSetMetaData meta = result.getMetaData();
-            int columns = meta.getColumnCount();
-            ArrayList<String> columnNames = new ArrayList<String>();
-            for (int i = 1; i <= columns; i++) {
-                columnNames.add(meta.getColumnName(i));
-            }
-
-            while (result.next()) {
-
-                for (String s : columnNames) {
-                    String output = s + ": ";
-                    output += result.getString(s) + " ";
-                    System.out.println(output);
-                }
-            }
-
-            System.out.println();
-            con.close();
-            return true;
-        }
-        catch (Exception e) {
-            System.out.println("Failed to log user in");
-            return false;
-        }
-    }
-
     public static void adminManageApplicants() {
-
+        System.out.println();
+        System.out.println("Manage Applicant:");
+        try {
+            System.out.println("Applicant Student ID: ");
+            int input = Integer.parseInt(Buff.readLine());
+            if (validateResident(input, "housing.applicant")) {
+                Boolean go = true;
+                while (go) {
+                    try {
+                        System.out.println("    1. Check Application Status");
+                        System.out.println("    2. Approve Application");
+                        System.out.println("    3. Reject Application");
+                        System.out.println("    4. Edit Application");
+                        System.out.println("    5. Back");
+                        System.out.print("Type in your option: ");
+                        int updateInput = Integer.parseInt(Buff.readLine());
+                        switch (updateInput) {
+                            case 1:
+                                updateInput = 1;
+                                String queryStatus = "SELECT student_id, application_status FROM housing.applicant WHERE student_id = " + input;
+                                testDB(queryStatus);
+                                break;
+                            case 2:
+                                updateInput = 2;
+                                String queryApprove = "UPDATE housing.applicant SET application_status = \"approved\""
+                                        + " WHERE student_id = " + input;
+                                String validateApprove = "SELECT * FROM housing.applicant WHERE student_id = " + input;
+                                testDBUpdate(queryApprove, validateApprove);
+                                break;
+                            case 3:
+                                updateInput = 3;
+                                String queryReject = "UPDATE housing.applicant SET application_status = \"rejected\""
+                                        + " WHERE student_id = " + input;
+                                String validateReject = "SELECT * FROM housing.applicant WHERE student_id = " + input;
+                                testDBUpdate(queryReject, validateReject);
+                                break;
+                            case 4:
+                                updateInput = 4;
+                                System.out.print("New Application Status: ");
+                                String newStatus = Buff.readLine();
+                                System.out.print("New Fee Amount: ");
+                                int newFee = Integer.parseInt(Buff.readLine());
+                                System.out.print("New Marriage Status: ");
+                                String newMarriage = Buff.readLine();
+                                System.out.print("New Roommate ID: ");
+                                String newRoommate = Buff.readLine();
+                                String queryLocation = "UPDATE housing.applicant SET"
+                                        + " application_status = \"" + newStatus + "\""
+                                        + ", fee = " + newFee
+                                        + ", married = " + newMarriage
+                                        + ", roommate_id = " + newRoommate
+                                        + " WHERE student_id = " + input;
+                                String validateLocation = "SELECT * FROM housing.applicant WHERE student_id = " + input;
+                                testDBUpdate(queryLocation, validateLocation);
+                                break;
+                            case 5:
+                                updateInput = 5;
+                                go = false;
+                                break;
+                            default:
+                                System.out.println(String.format("Input %d is not a valid option", updateInput));
+                                break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.toString());
+                    }
+                }
+            } else {
+                System.out.println("Could not find Applicant with ID " + input);
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        System.out.println();
     }
 
     public static void adminManageMaintenance() {
@@ -377,6 +409,45 @@ public class Housing {
         return true;
     }
 
+    public static boolean validateResident(int studentID, String tableName) {
+        ResultSet result = null;
+        try {
+            DriverManager.registerDriver(new Driver());
+            String url = "jdbc:mysql://localhost:3306/housing?useSSL=false";
+            Connection con = DriverManager.getConnection(url, "student", "password");
+            Statement st = con.createStatement();
+            result = st.executeQuery("SELECT * FROM " + tableName + " WHERE student_id = " + studentID);
+            //
+            // result.next();
+            // String id = result.getString("student_id");
+            // int sid = Integer.parseInt(id);
+
+            ResultSetMetaData meta = result.getMetaData();
+            int columns = meta.getColumnCount();
+            ArrayList<String> columnNames = new ArrayList<String>();
+            for (int i = 1; i <= columns; i++) {
+                columnNames.add(meta.getColumnName(i));
+            }
+
+            while (result.next()) {
+
+                for (String s : columnNames) {
+                    String output = s + ": ";
+                    output += result.getString(s) + " ";
+                    System.out.println(output);
+                }
+            }
+
+            System.out.println();
+            con.close();
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println("Failed to log user in");
+            return false;
+        }
+    }
+
 
     public static Boolean queries(int option) {
         String query = "";
@@ -468,6 +539,8 @@ public class Housing {
                     System.out.println(output);
                 }
             }
+
+            System.out.println();
         }
         catch (Exception e) {
             System.out.println(e.toString());
