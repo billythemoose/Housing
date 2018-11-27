@@ -190,7 +190,7 @@ public class Housing {
         try {
             System.out.println("Resident Student ID: ");
             int input = Integer.parseInt(Buff.readLine());
-            if (validateResident(input, "housing.resident")) {
+            if (validateID(input, "student_id","housing.resident")) {
                 Boolean go = true;
                 while(go) {
                     try {
@@ -247,7 +247,7 @@ public class Housing {
         try {
             System.out.println("Applicant Student ID: ");
             int input = Integer.parseInt(Buff.readLine());
-            if (validateResident(input, "housing.applicant")) {
+            if (validateID(input, "student_id", "housing.applicant")) {
                 Boolean go = true;
                 while (go) {
                     try {
@@ -319,11 +319,86 @@ public class Housing {
     }
 
     public static void adminManageMaintenance() {
-
+        try {
+            System.out.println();
+            System.out.print("Maintenance Request ID: ");
+            String req = Buff.readLine();
+            int reqID = Integer.parseInt(req);
+            if (validateID(reqID, "request_id", "housing.maintenance_request")) {
+                System.out.print("New Student ID: ");
+                String stu = Buff.readLine();
+                int student_id = Integer.parseInt(stu);
+                System.out.print("New Employee ID: ");
+                String emp = Buff.readLine();
+                int employee_id = Integer.parseInt(emp);
+                System.out.print("New Building ID: ");
+                String build = Buff.readLine();
+                int building_id = Integer.parseInt(build);
+                System.out.print("New Room Number: ");
+                String room = Buff.readLine();
+                int room_number = Integer.parseInt(room);
+                System.out.print("New Description: ");
+                String description = Buff.readLine();
+                System.out.print("New Date Started (YYYY-MM-DD): ");
+                String dateStarted = Buff.readLine();
+                System.out.print("New Date Fixed (YYYY-MM-DD): ");
+                String dateFixed = Buff.readLine();
+                String updateQuery = "UPDATE housing.maintenance_request SET student_id = " + student_id
+                        + ", employee_id = " + employee_id + ", building_id = " + building_id
+                        + ", room_number = " + room_number + ", description = \"" + description + "\""
+                        + ", date_started = \"" + dateStarted + "\", date_fixed = \"" + dateFixed + "\""
+                        + " WHERE request_id = " + reqID;
+                String validateQuery = "SELECT * FROM housing.maintenance_request WHERE request_id = " + reqID;
+                testDBUpdate(updateQuery, validateQuery);
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 
     public static void adminReports() {
+        // resident count by building
+        // current applicants
+        // number of open maintenance requests
+        Boolean go = true;
+        while (go) {
+            System.out.println("Reports:");
+            try {
+                System.out.println("    1. Building Occupancy");
+                System.out.println("    2. Open Application Count");
+                System.out.println("    3. Open Maintenance Request Count");
+                System.out.println("    4. Back");
+                System.out.print("Type in your option: ");
+                int input = Integer.parseInt(Buff.readLine());
+                switch(input) {
+                    case 1: input = 1;
+                        String buildQuery = "SELECT building_id, Count(student_id) FROM housing.resident GROUP BY building_id";
+                        testDB(buildQuery);
+                        break;
+                    case 2: input = 2;
+                        String appQuery = "SELECT COUNT(student_id) FROM housing.applicant WHERE application_status NOT LIKE 'Accepted'" +
+                                " AND application_status NOT LIKE 'Rejected'";
+                        testDB(appQuery);
+                        break;
+                    case 3: input = 3;
+                        String reqQuery = "SELECT COUNT(request_id) FROM housing.maintenance_request WHERE date_fixed != NULL";
+                        testDB(reqQuery);
+                        break;
+                    case 4: input = 4;
+                        go = false;
+                        break;
+                    default:
+                        System.out.println(String.format("Input %d is not a valid option", input));
+                        break;
+                }
+            }
+            catch (Exception e) {
+                System.out.println(e.toString());
+            }
 
+            System.out.println();
+        }
     }
 
     //</editor-fold>
@@ -407,6 +482,10 @@ public class Housing {
         }
     }
     //</editor-fold>
+
+    //<editor-fold desc="User Actions>
+    TODO
+    //<editor-fold>
     //</editor-fold>
 
 
@@ -489,14 +568,14 @@ public class Housing {
         return true;
     }
 
-    public static boolean validateResident(int studentID, String tableName) {
+    public static boolean validateID(int validationID, String columnName, String tableName) {
         ResultSet result = null;
         try {
             DriverManager.registerDriver(new Driver());
             String url = "jdbc:mysql://localhost:3306/housing?useSSL=false";
             Connection con = DriverManager.getConnection(url, "student", "password");
             Statement st = con.createStatement();
-            result = st.executeQuery("SELECT * FROM " + tableName + " WHERE student_id = " + studentID);
+            result = st.executeQuery("SELECT * FROM " + tableName + " WHERE " + columnName + " = " + validationID);
             //
             // result.next();
             // String id = result.getString("student_id");

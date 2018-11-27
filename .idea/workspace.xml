@@ -28,12 +28,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="9707" />
+          <entry key="java" value="11575" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="9707" />
+          <entry key="JAVA" value="11575" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -53,20 +53,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/group7/Housing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="376" column="62" lean-forward="true" selection-start-line="376" selection-start-column="62" selection-end-line="376" selection-end-column="62" />
+            <state relative-caret-position="135">
+              <caret line="143" column="22" selection-start-line="143" selection-start-column="21" selection-end-line="143" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#187#188#0" expanded="true" />
                 <element signature="e#215#216#0" expanded="true" />
+                <element signature="e#5043#5078#0" />
                 <element signature="method#adminActions#0;class#Housing#0" />
-                <element signature="method#adminManageResidents#0;class#Housing#0" />
-                <element signature="method#adminManageApplicants#0;class#Housing#0" />
                 <element signature="method#adminReports#0;class#Housing#0" />
-                <element signature="e#15473#15474#0" expanded="true" />
-                <element signature="e#15499#15500#0" expanded="true" />
-                <element signature="e#15535#15536#0" expanded="true" />
-                <element signature="e#15561#15562#0" expanded="true" />
+                <element signature="e#14220#14259#0" />
+                <element signature="method#applicantCreateNew#0;class#Housing#0" />
+                <element signature="e#21457#21458#0" expanded="true" />
+                <element signature="e#21483#21484#0" expanded="true" />
+                <element signature="e#21519#21520#0" expanded="true" />
+                <element signature="e#21545#21546#0" expanded="true" />
                 <element signature="e#16885#16893#0" expanded="true" />
               </folding>
             </state>
@@ -141,7 +142,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543303423306" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543307951840" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -187,12 +188,12 @@
       <option name="presentableId" value="Default" />
       <updated>1543014645264</updated>
       <workItem from="1543014650127" duration="1288000" />
-      <workItem from="1543273007166" duration="23620000" />
+      <workItem from="1543273007166" duration="28002000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24908000" />
+    <option name="totallyTimeSpent" value="29290000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -205,6 +206,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1059" y="0" width="1508" height="1407" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15745856" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -253,7 +255,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>461</line>
+          <line>540</line>
           <properties />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
@@ -277,12 +279,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>192</line>
-          <properties />
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
           <line>237</line>
           <properties />
           <option name="timeStamp" value="17" />
@@ -301,25 +297,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>552</line>
+          <line>631</line>
           <properties />
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>549</line>
+          <line>628</line>
           <properties />
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>350</line>
+          <line>425</line>
           <properties />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>352</line>
+          <line>427</line>
           <properties />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
@@ -331,37 +327,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>348</line>
+          <line>423</line>
           <properties />
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>347</line>
+          <line>422</line>
           <properties />
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>682</line>
+          <line>761</line>
           <properties />
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>584</line>
+          <line>663</line>
           <properties />
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>540</line>
+          <line>619</line>
           <properties />
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>546</line>
+          <line>625</line>
           <properties />
           <option name="timeStamp" value="37" />
         </line-breakpoint>
@@ -378,20 +374,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/group7/Housing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="376" column="62" lean-forward="true" selection-start-line="376" selection-start-column="62" selection-end-line="376" selection-end-column="62" />
+        <state relative-caret-position="135">
+          <caret line="143" column="22" selection-start-line="143" selection-start-column="21" selection-end-line="143" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#187#188#0" expanded="true" />
             <element signature="e#215#216#0" expanded="true" />
+            <element signature="e#5043#5078#0" />
             <element signature="method#adminActions#0;class#Housing#0" />
-            <element signature="method#adminManageResidents#0;class#Housing#0" />
-            <element signature="method#adminManageApplicants#0;class#Housing#0" />
             <element signature="method#adminReports#0;class#Housing#0" />
-            <element signature="e#15473#15474#0" expanded="true" />
-            <element signature="e#15499#15500#0" expanded="true" />
-            <element signature="e#15535#15536#0" expanded="true" />
-            <element signature="e#15561#15562#0" expanded="true" />
+            <element signature="e#14220#14259#0" />
+            <element signature="method#applicantCreateNew#0;class#Housing#0" />
+            <element signature="e#21457#21458#0" expanded="true" />
+            <element signature="e#21483#21484#0" expanded="true" />
+            <element signature="e#21519#21520#0" expanded="true" />
+            <element signature="e#21545#21546#0" expanded="true" />
             <element signature="e#16885#16893#0" expanded="true" />
           </folding>
         </state>
