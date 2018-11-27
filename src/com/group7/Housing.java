@@ -22,6 +22,7 @@ public class Housing {
         BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
         Boolean go = true;
         while (go) {
+            UserID = -1;
             System.out.println("                                    1. Resident Login");
             System.out.println("                                    2. Applicant Login");
             System.out.println("                                    3. Administrator Login");
@@ -76,7 +77,7 @@ public class Housing {
             BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
             int input = Integer.parseInt(buff.readLine());
             String query = "SELECT student_id FROM housing.resident WHERE student_id = " + input;
-            executeLoginQuery(query, 1);
+            executeLoginQuery(query, false);
         }
         catch (Exception e){
             System.out.println("Failed to read Student ID");
@@ -89,8 +90,8 @@ public class Housing {
             System.out.print("Student ID: ");
             BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
             int input = Integer.parseInt(buff.readLine());
-            String query = "SELECT applicant_id FROM housing.applicant WHERE student_id = " + input;
-            Boolean result = executeLoginQuery(query, 2);
+            String query = "SELECT student_id FROM housing.applicant WHERE student_id = " + input;
+            Boolean result = executeLoginQuery(query, false);
             if (!result) {
                 System.out.print("Would you like to start a new application? (Y/N)");
                 String startNew = buff.readLine();
@@ -110,14 +111,14 @@ public class Housing {
 
     public static Boolean adminLogin() {
         try {
-            System.out.print("Student ID: ");
+            System.out.print("Admin ID: ");
             BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
             int input = Integer.parseInt(buff.readLine());
             String query = "SELECT admin_id FROM housing.admin WHERE admin_id = " + input;
-            executeLoginQuery(query, 2);
+            executeLoginQuery(query, true);
         }
         catch (Exception e){
-            System.out.println("Failed to read Application ID");
+            System.out.println("Failed to read Admin ID");
         }
         return true;
     }
@@ -141,21 +142,14 @@ public class Housing {
 
 
     //<editor-fold desc="Database Execution">
-    public static Boolean executeLoginQuery(String query, int logInType ) {
+    public static Boolean executeLoginQuery(String query, Boolean isAdmin ) {
         ResultSet result = null;
         String columnName;
-        switch (logInType) {
-            case 1: logInType = 1 ;
-                columnName = "student_id";
-                break;
-            case 2: logInType = 2;
-                columnName = "application_id";
-                break;
-            case 3: logInType = 3;
-                columnName = "admin_id";
-                break;
-            default:
-                columnName = "student_id";
+        if (isAdmin) {
+            columnName = "admin_id";
+        }
+        else {
+            columnName = "student_id";
         }
         try {
             DriverManager.registerDriver(new Driver());
@@ -164,7 +158,7 @@ public class Housing {
             Statement st = con.createStatement();
             result = st.executeQuery(query);
             result.next();
-            String id = result.getString("student_id");
+            String id = result.getString(columnName);
             UserID = Integer.parseInt(id);
             con.close();
             System.out.println("Logged in with " + columnName + " = " + UserID);
