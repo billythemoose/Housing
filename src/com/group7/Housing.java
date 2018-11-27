@@ -108,7 +108,7 @@ public class Housing {
                 }
             }
             else {
-
+                applicantActions();
             }
         }
         catch (Exception e){
@@ -330,20 +330,19 @@ public class Housing {
 
     //<editor-fold desc="Applicant Actions>
     public static void applicantCreateNew() {
-        BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
         BigInteger sID, fee;
         String appDate;
         String query = "INSERT INTO housing.applicant (student_id,application_status,submission_date,fee,married) VALUES (";
         boolean married;
         try {
             System.out.print("Student ID: ");
-            sID = new BigInteger(buff.readLine());
+            sID = new BigInteger(Buff.readLine());
             System.out.print("Fee: ");
-            fee = new BigInteger(buff.readLine());
+            fee = new BigInteger(Buff.readLine());
             System.out.print("Enter Date (YYYY-MM-DD): ");
-            appDate = buff.readLine();
+            appDate = Buff.readLine();
             System.out.print("Married (TRUE or FALSE): ");
-            married = Boolean.valueOf(buff.readLine());
+            married = Boolean.valueOf(Buff.readLine());
             query = query + sID + "," + "'In Progress'" + ", '" + appDate + "'," + fee + "," + married + ");" ;
             String validate = "SELECT * FROM housing.applicant WHERE student_id = " + sID;
             testDBUpdate(query, validate);
@@ -353,6 +352,58 @@ public class Housing {
         }
         catch (Exception e) {
 
+        }
+    }
+
+    public static void applicantActions() {
+        Boolean go = true;
+        while (go) {
+            System.out.println("Applicant Actions:");
+            try {
+                System.out.println("    1. Check Application Status");
+                System.out.println("    2. Edit Application");
+                System.out.println("    3. Delete Application");
+                System.out.println("    4. Back");
+                System.out.print("Type in your option: ");
+                int inputApp = Integer.parseInt(Buff.readLine());
+                switch(inputApp) {
+                    case 1: inputApp = 1;
+                        String appStatus = "SELECT application_status FROM housing.applicant WHERE student_id = " + UserID;
+                        testDB(appStatus);
+                        break;
+                    case 2: inputApp = 2;
+                        System.out.println();
+                        System.out.println("Information to Update: ");
+                        System.out.print("Marriage Status: ");
+                        Boolean married;
+                        married = Boolean.valueOf(Buff.readLine());
+                        System.out.print("New Roommate ID: ");
+                        String roommate = Buff.readLine();
+                        int roommateID = Integer.parseInt(roommate);
+                        String appUpdate = "UPDATE housing.applicant SET married = " + married + ", roommate_id = " + roommateID
+                                + " WHERE student_id = " + UserID;
+                        String appValidate = "SELECT * FROM housing.applicant WHERE student_id = " + UserID;
+                        testDBUpdate(appUpdate, appValidate);
+                        break;
+                    case 3: inputApp = 3;
+                        String appDelete = "DELETE FROM housing.applicant WHERE student_id = " + UserID;
+                        String appDeleteValidate = "SELECT * FROM housing.applicant WHERE student_id = " + UserID;
+                        testDBUpdate(appDelete, appDeleteValidate);
+                        go = false;
+                        break;
+                    case 4: inputApp = 4;
+                        go = false;
+                        break;
+                    default:
+                        System.out.println(String.format("Input %d is not a valid option", inputApp));
+                        break;
+                }
+            }
+            catch (Exception e) {
+                System.out.println(e.toString());
+            }
+
+            System.out.println();
         }
     }
     //</editor-fold>
@@ -558,33 +609,6 @@ public class Housing {
                 result = true;
                 break;
             case 3: option = 3;
-            /*
-                testDB("SELECT DISTINCT room_type FROM room;");
-                BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
-                BigInteger sID, fee;
-                String appDate;
-                query = "INSERT INTO housing.applicant (student_id,application_status,submission_date,fee,married) VALUES (";
-                boolean married;
-                try {
-                    System.out.print("Student ID: ");
-                    sID = new BigInteger(buff.readLine());
-                    System.out.print("Fee: ");
-                    fee = new BigInteger(buff.readLine());
-                    System.out.print("Enter Date (YYYY-MM-DD): ");
-                    appDate = buff.readLine();
-                    System.out.print("Married (True or False): ");
-                    married = Boolean.valueOf(buff.readLine());
-                    query = query + sID + "," + "'In Progress'" + ", '" + appDate + "'," + fee + "," + married + ");" ;
-                    testDBUpdate(query);
-                    createRoomPref(sID);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                catch (Exception e) {
-
-                }
-                testDB(query);
-                */
                 result = true;
                 break;
             case 4: option = 4;

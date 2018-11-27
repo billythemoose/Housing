@@ -28,12 +28,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="8370" />
+          <entry key="java" value="9707" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="8370" />
+          <entry key="JAVA" value="9707" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -53,28 +53,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/group7/Housing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="493" column="144" selection-start-line="493" selection-start-column="144" selection-end-line="493" selection-end-column="144" />
+            <state relative-caret-position="680">
+              <caret line="376" column="62" lean-forward="true" selection-start-line="376" selection-start-column="62" selection-end-line="376" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#187#188#0" expanded="true" />
                 <element signature="e#215#216#0" expanded="true" />
-                <element signature="e#4926#4961#0" />
+                <element signature="method#adminActions#0;class#Housing#0" />
+                <element signature="method#adminManageResidents#0;class#Housing#0" />
+                <element signature="method#adminManageApplicants#0;class#Housing#0" />
+                <element signature="method#adminReports#0;class#Housing#0" />
                 <element signature="e#15473#15474#0" expanded="true" />
                 <element signature="e#15499#15500#0" expanded="true" />
                 <element signature="e#15535#15536#0" expanded="true" />
                 <element signature="e#15561#15562#0" expanded="true" />
                 <element signature="e#16885#16893#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.12/mysql-connector-java-8.0.12.jar!/com/mysql/cj/jdbc/result/ResultSetImpl.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="573">
-              <caret line="558" selection-start-line="558" selection-end-line="558" />
             </state>
           </provider>
         </entry>
@@ -147,7 +141,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543295656491" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543303423306" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -193,12 +187,12 @@
       <option name="presentableId" value="Default" />
       <updated>1543014645264</updated>
       <workItem from="1543014650127" duration="1288000" />
-      <workItem from="1543273007166" duration="20724000" />
+      <workItem from="1543273007166" duration="23620000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22012000" />
+    <option name="totallyTimeSpent" value="24908000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -211,7 +205,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1059" y="0" width="1508" height="1407" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15745856" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -260,7 +253,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>410</line>
+          <line>461</line>
           <properties />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
@@ -308,31 +301,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>561</line>
-          <properties />
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>501</line>
+          <line>552</line>
           <properties />
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>498</line>
+          <line>549</line>
           <properties />
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>351</line>
+          <line>350</line>
           <properties />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>353</line>
+          <line>352</line>
           <properties />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
@@ -344,37 +331,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>349</line>
+          <line>348</line>
           <properties />
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>348</line>
+          <line>347</line>
           <properties />
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>658</line>
+          <line>682</line>
           <properties />
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>533</line>
+          <line>584</line>
           <properties />
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>489</line>
+          <line>540</line>
           <properties />
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>495</line>
+          <line>546</line>
           <properties />
           <option name="timeStamp" value="37" />
         </line-breakpoint>
@@ -384,20 +371,23 @@
   <component name="editorHistoryManager">
     <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.12/mysql-connector-java-8.0.12.jar!/com/mysql/cj/jdbc/result/ResultSetImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
+        <state relative-caret-position="757">
           <caret line="558" selection-start-line="558" selection-end-line="558" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/group7/Housing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="493" column="144" selection-start-line="493" selection-start-column="144" selection-end-line="493" selection-end-column="144" />
+        <state relative-caret-position="680">
+          <caret line="376" column="62" lean-forward="true" selection-start-line="376" selection-start-column="62" selection-end-line="376" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#187#188#0" expanded="true" />
             <element signature="e#215#216#0" expanded="true" />
-            <element signature="e#4926#4961#0" />
+            <element signature="method#adminActions#0;class#Housing#0" />
+            <element signature="method#adminManageResidents#0;class#Housing#0" />
+            <element signature="method#adminManageApplicants#0;class#Housing#0" />
+            <element signature="method#adminReports#0;class#Housing#0" />
             <element signature="e#15473#15474#0" expanded="true" />
             <element signature="e#15499#15500#0" expanded="true" />
             <element signature="e#15535#15536#0" expanded="true" />
