@@ -122,12 +122,175 @@ public class Housing {
             int input = Integer.parseInt(Buff.readLine());
             String query = "SELECT admin_id FROM housing.admin WHERE admin_id = " + input;
             executeLoginQuery(query, true);
+            System.out.println();
+            if (UserID != -1) {
+                adminActions();
+            }
+            else {
+                System.out.println("Failed to log in as admin");
+            }
         }
         catch (Exception e){
             System.out.println("Failed to read Admin ID");
         }
         return true;
     }
+
+    //</editor-fold>
+
+
+
+    //<editor-fold desc="User Actions>
+    //<editor-fold desc="Admin Actions>
+    public static void adminActions() {
+        Boolean go = true;
+        while (go) {
+            System.out.println("Administrator Actions:");
+            try {
+                System.out.println("    1. Manage Residents");
+                System.out.println("    2. Manage Applicants");
+                System.out.println("    3. Manage Maintenance Requests");
+                System.out.println("    4. Administrative Reports");
+                System.out.println("    5. Back");
+                System.out.print("Type in your option: ");
+                int input = Integer.parseInt(Buff.readLine());
+                switch(input) {
+                    case 1: input = 1;
+                        adminManageResidents();
+                        break;
+                    case 2: input = 2;
+                        adminManageApplicants();
+                        break;
+                    case 3: input = 3;
+                        adminManageMaintenance();
+                        break;
+                    case 4: input = 4;
+                        adminReports();
+                        break;
+                    case 5: input = 5;
+                        go = false;
+                        break;
+                    default:
+                        System.out.println(String.format("Input %d is not a valid option", input));
+                        break;
+                }
+            }
+            catch (Exception e) {
+                System.out.println(e.toString());
+            }
+
+            System.out.println();
+        }
+    }
+
+    public static void adminManageResidents() {
+        System.out.println();
+        System.out.println("Manage Resident:");
+        try {
+            System.out.println("Resident Student ID: ");
+            int input = Integer.parseInt(Buff.readLine());
+            if (validateResident(input)) {
+                try {
+                    System.out.println("    1. Change Location");
+                    System.out.println("    2. Adjust Rent");
+                    System.out.println("    3. Back");
+                    System.out.print("Type in your option: ");
+                    int updateInput = Integer.parseInt(Buff.readLine());
+                    switch(updateInput) {
+                        case 1: updateInput = 1;
+                            System.out.print("New Building ID: ");
+                            int newBuilding = Integer.parseInt(Buff.readLine());
+                            System.out.print("New Room Number: ");
+                            int newRoom = Integer.parseInt(Buff.readLine());
+                            System.out.println(newBuilding + " " + newRoom);
+                            break;
+                        case 2: updateInput = 2;
+                            adminManageApplicants();
+                            break;
+                        case 3: updateInput = 3;
+                            break;
+                        default:
+                            System.out.println(String.format("Input %d is not a valid option", updateInput));
+                            break;
+                    }
+                }
+                catch (Exception e) {
+                    System.out.println(e.toString());
+                }
+            }
+            else {
+                System.out.println("Could not find Resident with ID " + input);
+            }
+            // try and find the student id
+            // if found, print out the information
+            // print out the potential options
+                // change building ID and room number
+                // change outstanding rent
+            // take option
+            // ask for new inputs
+            // attempt update of inputs
+                // room update
+                    // update
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        System.out.println();
+    }
+
+    public static boolean validateResident(int studentID) {
+        ResultSet result = null;
+        try {
+            DriverManager.registerDriver(new Driver());
+            String url = "jdbc:mysql://localhost:3306/housing?useSSL=false";
+            Connection con = DriverManager.getConnection(url, "student", "password");
+            Statement st = con.createStatement();
+            result = st.executeQuery("SELECT * FROM housing.resident WHERE student_id = " + studentID);
+            //
+            // result.next();
+            // String id = result.getString("student_id");
+            // int sid = Integer.parseInt(id);
+
+            ResultSetMetaData meta = result.getMetaData();
+            int columns = meta.getColumnCount();
+            ArrayList<String> columnNames = new ArrayList<String>();
+            for (int i = 1; i <= columns; i++) {
+                columnNames.add(meta.getColumnName(i));
+            }
+
+            while (result.next()) {
+
+                for (String s : columnNames) {
+                    String output = s + ": ";
+                    output += result.getString(s) + " ";
+                    System.out.println(output);
+                }
+            }
+
+            System.out.println();
+            con.close();
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println("Failed to log user in");
+            return false;
+        }
+    }
+
+    public static void adminManageApplicants() {
+
+    }
+
+    public static void adminManageMaintenance() {
+
+    }
+
+    public static void adminReports() {
+
+    }
+
+    //</editor-fold>
 
     //</editor-fold>
 
