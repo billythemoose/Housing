@@ -87,6 +87,13 @@ public class Housing {
             int input = Integer.parseInt(Buff.readLine());
             String query = "SELECT student_id FROM housing.resident WHERE student_id = " + input;
             executeLoginQuery(query, false);
+            System.out.println();
+            if (UserID != -1) {
+                residentActions();
+            }
+            else {
+                System.out.println("Failed to log in as resident");
+            }
         }
         catch (Exception e){
             System.out.println("Failed to read Student ID");
@@ -483,8 +490,93 @@ public class Housing {
     }
     //</editor-fold>
 
-    //<editor-fold desc="User Actions>
-    TODO
+    //<editor-fold desc="Resident Actions>
+    public static void residentActions() {
+        Boolean go = true;
+        while (go) {
+            System.out.println("Resident Actions:");
+            try {
+                System.out.println("    1. Create New Maintenance Request");
+                System.out.println("    2. Check Open Maintenance Requests");
+                System.out.println("    3. Adjust Outstanding Rent");
+                System.out.println("    4. Back");
+                System.out.print("Type in your option: ");
+                int inputApp = Integer.parseInt(Buff.readLine());
+                switch(inputApp) {
+                    case 1: inputApp = 1;
+                        residentCreateMaintenance();
+                        break;
+                    case 2: inputApp = 2;
+                        residentCheckMaintenance();
+                        break;
+                    case 3: inputApp = 3;
+                        residentRent();
+                        break;
+                    case 4: inputApp = 4;
+                        go = false;
+                        break;
+                    default:
+                        System.out.println(String.format("Input %d is not a valid option", inputApp));
+                        break;
+                }
+            }
+            catch (Exception e) {
+                System.out.println(e.toString());
+            }
+
+            System.out.println();
+        }
+    }
+
+    public static void residentCreateMaintenance() {
+        try {
+            System.out.println();
+            System.out.print("New Maintenance Request: ");
+            int student_id = UserID;
+            System.out.print("Building ID: ");
+            String build = Buff.readLine();
+            int building_id = Integer.parseInt(build);
+            System.out.print("Room Number: ");
+            String room = Buff.readLine();
+            int room_number = Integer.parseInt(room);
+            System.out.print("Description: ");
+            String description = Buff.readLine();
+            String updateQuery = "UPDATE housing.maintenance_request SET student_id = " + student_id
+                    + ", building_id = " + building_id  + ", room_number = " + room_number
+                    + ", description = \"" + description + "\"";
+            String validateQuery = "SELECT * FROM housing.maintenance_request WHERE student_id = " + UserID;
+            testDBUpdate(updateQuery, validateQuery);
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public static void residentCheckMaintenance() {
+        // pull all maintenance requests that are open with current user ID
+        System.out.println("Currently Open Maintenance Requests: ");
+        String query = "SELECT * FROM housing.maintenance_request WHERE student_id = " + UserID;
+        testDB(query);
+    }
+
+    public static void residentRent() {
+        // change the value of outstanding rent
+        System.out.println("Current Rent Value: ");
+        String currentRent = "SELECT outstanding_rent FROM housing.resident WHERE student_id = " + UserID;
+        testDB(currentRent);
+        try {
+            System.out.print("Updated Rent Value: ");
+            String build = Buff.readLine();
+            int newRent = Integer.parseInt(build);
+            String updateRent = "UPDATE housing.resident SET outstanding_rent = " + newRent + " WHERE student_id = " + UserID;
+            testDBUpdate(updateRent, currentRent);
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
+
     //<editor-fold>
     //</editor-fold>
 
