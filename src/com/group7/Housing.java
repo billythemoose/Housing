@@ -202,7 +202,10 @@ public class Housing {
                             int newBuilding = Integer.parseInt(Buff.readLine());
                             System.out.print("New Room Number: ");
                             int newRoom = Integer.parseInt(Buff.readLine());
-                            System.out.println(newBuilding + " " + newRoom);
+                            String query = "UPDATE housing.resident SET building_id = " + newBuilding
+                                    + ", room_number= " + newRoom + " WHERE student_id = "  + input;
+                            String validate = "SELECT * FROM housing.resident WHERE student_id = " + input;
+                            testDBUpdate(query, validate);
                             break;
                         case 2: updateInput = 2;
                             adminManageApplicants();
@@ -439,6 +442,38 @@ public class Housing {
         return result;
     }
 
+    public static void testDBUpdate(String update, String validation) {
+        try {
+            DriverManager.registerDriver(new Driver());
+            String url = "jdbc:mysql://localhost:3306/housing?useSSL=false";
+
+            //String url = "jdbc:mysql://localhost:3306/housing?autoReconnect=true&useSSL=false";
+            Connection con = DriverManager.getConnection(url, "student", "password");
+            Statement st = con.createStatement();
+            int resultRowChange = st.executeUpdate(update);
+            ResultSet result = st.executeQuery(validation);
+
+            ResultSetMetaData meta = result.getMetaData();
+            int columns = meta.getColumnCount();
+            ArrayList<String> columnNames = new ArrayList<String>();
+            for (int i = 1; i <= columns; i++) {
+                columnNames.add(meta.getColumnName(i));
+            }
+
+            System.out.println("Results: ");
+            while (result.next()) {
+                for (String s : columnNames) {
+                    String output = s + ": ";
+                    output += result.getString(s) + " ";
+                    System.out.println(output);
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+    }
 
     public static void testDB(String query) {
 
