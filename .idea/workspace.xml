@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61fb4087-94da-4c7f-949a-2917143f1ec7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/group7/Housing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/group7/Housing.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -30,12 +29,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="12768" />
+          <entry key="java" value="12802" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="12768" />
+          <entry key="JAVA" value="12802" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -55,8 +54,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/group7/Housing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="95" column="13" selection-start-line="95" selection-start-column="13" selection-end-line="95" selection-end-column="13" />
+            <state relative-caret-position="447">
+              <caret line="798" column="49" selection-start-line="798" selection-start-column="49" selection-end-line="798" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#adminActions#0;class#Housing#0" />
@@ -147,7 +146,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543340852862" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543344230521" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -194,12 +193,12 @@
       <updated>1543014645264</updated>
       <workItem from="1543014650127" duration="1288000" />
       <workItem from="1543273007166" duration="28135000" />
-      <workItem from="1543336395876" duration="3325000" />
+      <workItem from="1543336395876" duration="5479000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32748000" />
+    <option name="totallyTimeSpent" value="34902000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -223,7 +222,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299293" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26630008" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.30479184" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.31500393" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -345,7 +344,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/group7/Housing.java</url>
-          <line>853</line>
+          <line>847</line>
           <properties />
           <option name="timeStamp" value="33" />
         </line-breakpoint>
@@ -386,8 +385,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/group7/Housing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="95" column="13" selection-start-line="95" selection-start-column="13" selection-end-line="95" selection-end-column="13" />
+        <state relative-caret-position="447">
+          <caret line="798" column="49" selection-start-line="798" selection-start-column="49" selection-end-line="798" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#adminActions#0;class#Housing#0" />

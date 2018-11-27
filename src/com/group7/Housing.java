@@ -590,17 +590,21 @@ public class Housing {
             try {
                 System.out.println("    1. Female Student Resident History");
                 System.out.println("    2. Married Resident Major Information");
-                System.out.println("    3. Back");
+                System.out.println("    3. Occupancy Information");
+                System.out.println("    4. Back");
                 System.out.print("Type in your option: ");
                 int input = Integer.parseInt(Buff.readLine());
                 switch(input) {
                     case 1: input = 1;
-                        females();
+                        queries(4);
                         break;
                     case 2: input = 2;
-                        married();
+                        queries(5);
                         break;
                     case 3: input = 3;
+                        queries(3);
+                        break;
+                    case 4: input = 4;
                         go = false;
                         break;
                     default:
@@ -616,14 +620,6 @@ public class Housing {
         }
 
         return true;
-    }
-
-    public static void females() {
-        queries(4);
-    }
-
-    public static void married() {
-        queries(5);
     }
 
     //</editor-fold>
@@ -780,23 +776,21 @@ public class Housing {
                 result = true;
                 break;
             case 3: option = 3;
+                query = "Select * from housing.room where room.occupancy < room. capacity AND"
+                + " (room_type = 'Two Bedroom Apartment' OR room_type = 'Four Bedroom Apartment' OR"
+                + " room_type = 'One Bedroom Suit' or room_type = 'Two Bedroom Suit') order by address";
+                testDB(query);
                 result = true;
                 break;
             case 4: option = 4;
                 //System.out.println("Press 1 to view the number of female residents (per year)");
                 //System.out.println("Press 2 to view the list of married residents who study the same majors");
 
-                query = "Select count(resident.student_id) as 'number_of_female_residents', YEAR(graduation_date) as 'Year'"
-                        + "From housing.resident, housing.student "
-                        + "Where housing.resident.student_id = housing.student.student_id AND housing.student.student_id in (SELECT student_id  "
-                        + "FROM housing.student "
-                        + "Where gender = 'Female' AND  "
-                        + "YEAR(graduation_date) = 2018 OR "
-                        + "YEAR(graduation_date) = 2017 OR "
-                        + "YEAR(graduation_date) = 2016 OR "
-                        + "YEAR(graduation_date) = 2015 OR "
-                        + "YEAR(graduation_date) = 2014) "
-                        + "GROUP BY YEAR(graduation_date);";
+                query = "Select count(student.student_id) as 'number_of_female_residents', YEAR(graduation_date) as 'Year'"
+                    + " From housing.student Where housing.student.student_id in (SELECT student_id FROM housing.student"
+                    + " Where gender = 'Female' AND YEAR(graduation_date) = 2018 OR YEAR(graduation_date) = 2017 OR"
+                    + " YEAR(graduation_date) = 2016 OR YEAR(graduation_date) = 2015 OR YEAR(graduation_date) = 2014)"
+                    + " group by YEAR(graduation_date)";
                 testDB(query);
                 result = true;
                 break;
