@@ -8,13 +8,17 @@ import java.math.BigInteger;
 
 public class Housing {
 
+    // stores current user
     private static int UserID;
+
+    // stores main buffered reader
     private static BufferedReader Buff;
 
     public static void main(String[] args) {
         runProgram();
     }
 
+    // main handler for all housing actions
     public static void runProgram() {
         System.out.println("****************************************************************************************");
         System.out.println("                        Welcome to the Housing System");
@@ -81,6 +85,7 @@ public class Housing {
 
 
     //<editor-fold desc="User Logins">
+    // login for residents
     public static Boolean residentLogin() {
         try {
             System.out.print("Student ID: ");
@@ -101,6 +106,8 @@ public class Housing {
         return true;
     }
 
+    // login for applicants
+    // if login does not exist, prompts to create new application
     public static Boolean applicantLogin() {
         try {
             System.out.print("Student ID: ");
@@ -124,6 +131,7 @@ public class Housing {
         return true;
     }
 
+    // login for administrators
     public static Boolean adminLogin() {
         try {
             System.out.print("Admin ID: ");
@@ -150,6 +158,7 @@ public class Housing {
 
     //<editor-fold desc="User Actions>
     //<editor-fold desc="Admin Actions>
+    // main container for administrator actions
     public static void adminActions() {
         Boolean go = true;
         while (go) {
@@ -191,6 +200,7 @@ public class Housing {
         }
     }
 
+    // allows administrators to update resident information
     public static void adminManageResidents() {
         System.out.println();
         System.out.println("Manage Resident:");
@@ -248,6 +258,7 @@ public class Housing {
         System.out.println();
     }
 
+    // allows administrators to update applicant information
     public static void adminManageApplicants() {
         System.out.println();
         System.out.println("Manage Applicant:");
@@ -325,6 +336,7 @@ public class Housing {
         System.out.println();
     }
 
+    // allows administrators to update maintenance requests
     public static void adminManageMaintenance() {
         try {
             System.out.println();
@@ -364,10 +376,8 @@ public class Housing {
         }
     }
 
+    // main container for all administrator reports
     public static void adminReports() {
-        // resident count by building
-        // current applicants
-        // number of open maintenance requests
         Boolean go = true;
         while (go) {
             System.out.println("Reports:");
@@ -411,6 +421,7 @@ public class Housing {
     //</editor-fold>
 
     //<editor-fold desc="Applicant Actions>
+    // creates a new applicant
     public static void applicantCreateNew() {
         BigInteger sID, fee;
         String appDate;
@@ -437,6 +448,7 @@ public class Housing {
         }
     }
 
+    // main container for all current applicant actions
     public static void applicantActions() {
         Boolean go = true;
         while (go) {
@@ -491,6 +503,7 @@ public class Housing {
     //</editor-fold>
 
     //<editor-fold desc="Resident Actions>
+    //  main container for all resident actions
     public static void residentActions() {
         Boolean go = true;
         while (go) {
@@ -528,6 +541,7 @@ public class Housing {
         }
     }
 
+    // allows residents to create new maintenance requests
     public static void residentCreateMaintenance() {
         try {
             System.out.println();
@@ -552,6 +566,7 @@ public class Housing {
         }
     }
 
+    // allows residents to check all open requests under their ID
     public static void residentCheckMaintenance() {
         // pull all maintenance requests that are open with current user ID
         System.out.println("Currently Open Maintenance Requests: ");
@@ -559,6 +574,7 @@ public class Housing {
         testDB(query);
     }
 
+    // allows residents to update or "pay" outstanding rent
     public static void residentRent() {
         // change the value of outstanding rent
         System.out.println("Current Rent Value: ");
@@ -576,13 +592,13 @@ public class Housing {
         }
     }
 
-
     //<editor-fold>
     //</editor-fold>
 
 
 
     //<editor-fold desc="Demographic Information">
+    // main container for all demographic studies
     public static Boolean demographicStudies() {
         Boolean go = true;
         while (go) {
@@ -627,6 +643,7 @@ public class Housing {
 
 
     //<editor-fold desc="Database Execution">
+    // test to see if supplied UserID can log in as correct user type
     public static Boolean executeLoginQuery(String query, Boolean isAdmin ) {
         ResultSet result = null;
         String columnName;
@@ -656,6 +673,7 @@ public class Housing {
         return true;
     }
 
+    // validates if a given ID exists in a given table
     public static boolean validateID(int validationID, String columnName, String tableName) {
         ResultSet result = null;
         try {
@@ -695,6 +713,7 @@ public class Housing {
         }
     }
 
+    // adds room preferences when creating new applicants
     public static void createRoomPref(BigInteger sid) throws SQLException {
         String desRoom;
         System.out.println();
@@ -722,20 +741,7 @@ public class Housing {
         }
     }
 
-    public static void testDBUpdate(String query){
-        try {
-            DriverManager.registerDriver(new Driver());
-            String url = "jdbc:mysql://localhost:3306/housing?autoReconnect=true&useSSL=false";
-            Connection con = DriverManager.getConnection(url, "student", "password");
-            Statement st = con.createStatement();
-            st.executeUpdate(query);
-            con.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
-    }
-
+    // execute a single query and check if a value was found using the column name
     public static String testDBString(String query, String resultColumnName) {
         String resultString = "-1";
         try {
@@ -755,7 +761,7 @@ public class Housing {
         return resultString;
     }
 
-
+    //  main container for stored queries
     public static Boolean queries(int option) {
         String query = "";
         Boolean result = false;
@@ -816,6 +822,7 @@ public class Housing {
         return result;
     }
 
+    // executes an update query then validates the information was changed
     public static void testDBUpdate(String update, String validation) {
         try {
             DriverManager.registerDriver(new Driver());
@@ -851,6 +858,7 @@ public class Housing {
 
     }
 
+    // executes a single query and prints all columns and results
     public static void testDB(String query) {
 
         try {
